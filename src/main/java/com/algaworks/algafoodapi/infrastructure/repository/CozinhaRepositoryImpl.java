@@ -1,24 +1,26 @@
-package com.algaworks.algafoodapi.jpa;
+package com.algaworks.algafoodapi.infrastructure.repository;
 
 import com.algaworks.algafoodapi.domain.model.Cozinha;
-import org.springframework.stereotype.Component;
+import com.algaworks.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
+
 
     @PersistenceContext
     private EntityManager manager;
 
 
+    @Override
     public List<Cozinha> listar() {
         return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
 
+    @Override
     public Cozinha buscar(Long id) {
         return manager.find(Cozinha.class, id);
     }
