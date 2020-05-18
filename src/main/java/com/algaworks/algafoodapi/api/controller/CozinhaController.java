@@ -59,7 +59,7 @@ public class CozinhaController {
 
         Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
 
-        if(cozinhaAtual != null) {
+        if (cozinhaAtual != null) {
             BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
             cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
             return ResponseEntity.ok(cozinhaAtual);
@@ -69,14 +69,15 @@ public class CozinhaController {
     }
 
     @DeleteMapping("/{cozinhaId}")
-    public ResponseEntity<Cozinha> remover (@PathVariable Long cozinhaId) {
+    public ResponseEntity<?> remover(@PathVariable Long cozinhaId) {
         try {
             cadastroCozinha.excluir(cozinhaId);
             return ResponseEntity.noContent().build();
         } catch (EntidateNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
         } catch (EntidateEmUsoException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
         }
     }
 }
