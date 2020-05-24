@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("/cidades")
@@ -33,7 +34,7 @@ public class CidadeController {
 
     @GetMapping
     public List<Cidade> listar() {
-        return cidadeRepository.listar();
+        return cidadeRepository.findAll();
     }
 
     @PostMapping
@@ -52,13 +53,13 @@ public class CidadeController {
     @PutMapping("/{cidadeId}")
     public ResponseEntity<?> atualizar(@PathVariable Long cidadeId,
                                             @RequestBody Cidade cidade) {
-        Cidade cidadeAtual = cidadeRepository.buscar(cidadeId);
+        Optional<Cidade> cidadeAtual = cidadeRepository.findById(cidadeId);
 
         try {
-            if (cidadeAtual != null) {
-                BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-                cadastroCidade.salvar(cidadeAtual);
-                return ResponseEntity.ok(cidadeAtual);
+            if (cidadeAtual.isPresent()) {
+                BeanUtils.copyProperties(cidade, cidadeAtual.get(), "id");
+                Cidade cidadeSalva = cadastroCidade.salvar(cidadeAtual.get());
+                return ResponseEntity.ok(cidadeSalva);
             }
         } catch (EntidateNaoEncontradaException e) {
             return ResponseEntity.badRequest()
