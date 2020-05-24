@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    container_name: algafood-mysql
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=algafooddb
+      - MYSQL_USER=algafood
+      - MYSQL_PASSWORD=food
+      - TZ=America/Sao_Paulo
+    ports:
+      - "3306:3306"
+    volumes:
+      - c:/projetos/tempdocker/mysql-algafood
