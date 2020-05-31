@@ -1,16 +1,13 @@
 package com.algaworks.algafoodapi.domain.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-//@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class EntidateNaoEncontradaException extends ResponseStatusException {
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class EntidateNaoEncontradaException extends RuntimeException {
 
-    public EntidateNaoEncontradaException(HttpStatus status, String mensagem) {
-        super(status, mensagem);
-    }
 
     public EntidateNaoEncontradaException(String mensagem) {
-        this(HttpStatus.NOT_FOUND, mensagem);
+        super(mensagem);
     }
 }
