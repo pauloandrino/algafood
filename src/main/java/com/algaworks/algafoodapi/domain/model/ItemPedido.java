@@ -8,21 +8,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
 @Entity
-public class Permissao {
+public class ItemPedido {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
+    private Integer quantidade;
+    private BigDecimal precoUnitario;
+    private BigDecimal precoTotal;
+    private String observacao;
 
-    @Column(nullable = false)
-    private String descricao;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Produto produto;
 }
