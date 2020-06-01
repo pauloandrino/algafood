@@ -1,5 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
+import com.algaworks.algafoodapi.domain.exception.EntidateNaoEncontradaException;
+import com.algaworks.algafoodapi.domain.exception.NegocioException;
 import com.algaworks.algafoodapi.domain.model.Cidade;
 import com.algaworks.algafoodapi.domain.repository.CidadeRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroCidadeService;
@@ -42,7 +44,11 @@ public class CidadeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cidade adicionar(@RequestBody Cidade cidade) {
-        return cadastroCidade.salvar(cidade);
+        try {
+            return cadastroCidade.salvar(cidade);
+        } catch (EntidateNaoEncontradaException e) {
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @PutMapping("/{cidadeId}")
@@ -52,7 +58,11 @@ public class CidadeController {
 
         BeanUtils.copyProperties(cidade, cidadeAtual, "id");
 
-        return cadastroCidade.salvar(cidadeAtual);
+        try {
+            return cadastroCidade.salvar(cidadeAtual);
+        } catch (EntidateNaoEncontradaException e) {
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{cidadeId}")
