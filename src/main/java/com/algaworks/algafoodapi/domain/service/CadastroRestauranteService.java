@@ -1,6 +1,7 @@
 package com.algaworks.algafoodapi.domain.service;
 
 import com.algaworks.algafoodapi.domain.exception.EntidateNaoEncontradaException;
+import com.algaworks.algafoodapi.domain.exception.RestauranteNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.model.Cozinha;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.domain.repository.CozinhaRepository;
@@ -34,8 +35,6 @@ public class CadastroRestauranteService {
 
     public Restaurante buscarOuFalhar(Long restauranteId) {
         return restauranteRepository.findById(restauranteId)
-                .orElseThrow(() -> new EntidateNaoEncontradaException(
-                        String.format(MSG_RESTAURANTE_NAO_ENCONTRADA, restauranteId)
-                ));
+                .orElseThrow(() -> new RestauranteNaoEncontradaException(restauranteId));
     }
 }
