@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.domain.exception;
 
-public class EstadoNaoEncontradoException extends EntidateNaoEncontradaException {
+public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException {
 
     public EstadoNaoEncontradoException(String mensagem) {
         super(mensagem);

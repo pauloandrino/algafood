@@ -1,6 +1,5 @@
 package com.algaworks.algafoodapi.domain.service;
 
-import com.algaworks.algafoodapi.domain.exception.EntidateNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.exception.RestauranteNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.model.Cozinha;
 import com.algaworks.algafoodapi.domain.model.Restaurante;

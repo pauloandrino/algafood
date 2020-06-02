@@ -1,8 +1,7 @@
 package com.algaworks.algafoodapi.domain.service;
 
 import com.algaworks.algafoodapi.domain.exception.CozinhaNaoEncontradaException;
-import com.algaworks.algafoodapi.domain.exception.EntidateEmUsoException;
-import com.algaworks.algafoodapi.domain.exception.EntidateNaoEncontradaException;
+import com.algaworks.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafoodapi.domain.model.Cozinha;
 import com.algaworks.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class CadastroCozinhaService {
         } catch (EmptyResultDataAccessException e) {
             throw new CozinhaNaoEncontradaException(cozinhaId);
         } catch (DataIntegrityViolationException e) {
-            throw new EntidateEmUsoException(
+            throw new EntidadeEmUsoException(
                     String.format(MSG_COZINHA_EM_USO, cozinhaId));
         }
     }

@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.domain.exception;
 
-public class RestauranteNaoEncontradaException extends EntidateNaoEncontradaException {
+public class RestauranteNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     public RestauranteNaoEncontradaException(String mensagem) {
         super(mensagem);
