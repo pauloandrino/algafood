@@ -21,6 +21,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,17 +38,18 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = Groups.CadastroRestaurante.class)
+    @NotBlank
     @Column
     private String nome;
 
-    @PositiveOrZero(groups = Groups.CadastroRestaurante.class)
+    @PositiveOrZero
     @Column(nullable = false)
     private BigDecimal taxaFrete;
 
 
     @Valid
-    @NotNull(groups = Groups.CadastroRestaurante.class)
+    @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
+    @NotNull
     @ManyToOne
     private Cozinha cozinha;
 
