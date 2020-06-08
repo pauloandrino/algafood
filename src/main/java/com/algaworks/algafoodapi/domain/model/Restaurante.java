@@ -16,7 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -42,6 +44,8 @@ public class Restaurante {
     private BigDecimal taxaFrete;
 
 
+    @Valid
+    @NotNull
     @ManyToOne
     private Cozinha cozinha;
 
