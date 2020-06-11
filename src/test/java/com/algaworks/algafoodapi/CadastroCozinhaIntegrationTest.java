@@ -21,7 +21,7 @@ public class CadastroCozinhaIntegrationTest {
 	private CadastroCozinhaService cadastroCozinha;
 
 	@Test
-	public void testarCadastroCozinhaComSucesso() {
+	public void deveAtribuirId_QuandoCadastrarCozinhaComDadosCorretos() {
 
 		// cenário
 		Cozinha novaCozinha = new Cozinha();
@@ -37,7 +37,7 @@ public class CadastroCozinhaIntegrationTest {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void testarCadastroCozinhaSemNome() {
+	public void deveFalhar_QuandoCadastrarCozinhaSemNome() {
 
 		// cenário
 		Cozinha novaCozinha = new Cozinha();
