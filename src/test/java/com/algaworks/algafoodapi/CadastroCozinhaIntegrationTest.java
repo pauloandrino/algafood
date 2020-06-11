@@ -1,5 +1,7 @@
 package com.algaworks.algafoodapi;
 
+import com.algaworks.algafoodapi.domain.exception.EntidadeEmUsoException;
+import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.model.Cozinha;
 import com.algaworks.algafoodapi.domain.service.CadastroCozinhaService;
 import org.junit.Test;
@@ -45,6 +47,16 @@ public class CadastroCozinhaIntegrationTest {
 
 		// ação
 		novaCozinha = cadastroCozinha.salvar(novaCozinha);
+	}
+
+	@Test(expected = EntidadeEmUsoException.class)
+	public void deveFalhar_QuandoExcluirCozinhaEmUso() {
+		cadastroCozinha.excluir(1L);
+	}
+
+	@Test(expected = EntidadeNaoEncontradaException.class)
+	public void deveFalhar_QuandoExcluirCozinhaInexistente() {
+		cadastroCozinha.excluir(10L);
 	}
 
 }
