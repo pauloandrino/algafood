@@ -45,8 +45,6 @@ public class Restaurante {
 
     @NotNull
     @PositiveOrZero()
-    @Multiplo(numero =5)
-    @Column(nullable = false)
     private BigDecimal taxaFrete;
 
 
