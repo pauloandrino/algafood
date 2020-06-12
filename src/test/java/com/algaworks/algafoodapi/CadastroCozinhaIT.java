@@ -43,8 +43,6 @@ public class CadastroCozinhaIT {
     @Test
     public void deveConter4Cozinhas_QuandoConsultarCozinhas() {
 
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-
         given()
             .accept(ContentType.JSON)
         .when()
