@@ -9,16 +9,20 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class CadastroEstadoService {
 
     @Autowired
     EstadoRepository estadoRepository;
 
+    @Transactional
     public Estado salvar(Estado estado) {
         return estadoRepository.save(estado);
     }
 
+    @Transactional
     public void excuir(Long estadoId) {
         try {
             estadoRepository.deleteById(estadoId);
