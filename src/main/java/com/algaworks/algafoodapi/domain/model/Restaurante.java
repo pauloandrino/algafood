@@ -41,18 +41,18 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+//    @NotBlank
     @Column
     private String nome;
 
-    @NotNull
-    @PositiveOrZero()
+//    @NotNull
+//    @PositiveOrZero()
     private BigDecimal taxaFrete;
 
 
-    @Valid
-    @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
-    @NotNull
+//    @Valid
+//    @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
+//    @NotNull
     @ManyToOne
     private Cozinha cozinha;
 
