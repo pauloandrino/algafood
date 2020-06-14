@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -36,7 +36,7 @@ public class Usuario {
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
-    private LocalDateTime dataCadastro;
+    private OffsetDateTime dataCadastro;
 
     @ManyToMany
     @JoinTable(name = "usuario_grupo",
