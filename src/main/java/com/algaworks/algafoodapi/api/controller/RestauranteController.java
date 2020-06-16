@@ -23,6 +23,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.SmartValidator;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -132,5 +133,17 @@ public class RestauranteController {
 
         }
 
+    }
+
+    @PutMapping("/{restauranteId}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativar(@PathVariable Long restauranteId) {
+        cadastroRestaurante.ativar(restauranteId);
+    }
+
+    @DeleteMapping("/{restauranteId}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativar(@PathVariable Long restauranteId) {
+        cadastroRestaurante.inativar(restauranteId);
     }
 }
