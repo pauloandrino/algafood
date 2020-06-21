@@ -4,8 +4,8 @@ import com.algaworks.algafoodapi.api.assembler.RestauranteInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.RestauranteModelAssembler;
 import com.algaworks.algafoodapi.api.model.RestauranteModel;
 import com.algaworks.algafoodapi.api.model.input.RestauranteInput;
-import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafoodapi.domain.exception.EstadoNaoEncontradoException;
+import com.algaworks.algafoodapi.domain.exception.CidadeNaoEncontradaException;
+import com.algaworks.algafoodapi.domain.exception.CozinhaNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.exception.NegocioException;
 import com.algaworks.algafoodapi.domain.exception.ValidationException;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
@@ -14,7 +14,6 @@ import com.algaworks.algafoodapi.domain.service.CadastroRestauranteService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -80,7 +79,7 @@ public class RestauranteController {
         try {
             Restaurante restaurante = restauranteInputDisasembler.toDomainModel(restauranteInput);
             return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restaurante));
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
             throw new NegocioException(e.getMessage());
         }
     }
@@ -93,7 +92,7 @@ public class RestauranteController {
             restauranteInputDisasembler.copyToDomainInObject(restauranteInput, restauranteAtual);
 
             return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restauranteAtual));
-        } catch (EstadoNaoEncontradoException e) {
+        } catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
             throw new NegocioException(e.getMessage());
         }
     }
