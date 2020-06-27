@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.api.controller;
 
-import com.algaworks.algafoodapi.api.assembler.FormaPagamentoAssembler;
+import com.algaworks.algafoodapi.api.assembler.FormaPagamentoModelAssembler;
 import com.algaworks.algafoodapi.api.assembler.FormaPagamentoInputDisasembler;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoInput;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
@@ -31,7 +31,7 @@ public class FormaPagamentoController {
     FormaPagamentoRepository formaPagamentoRepository;
 
     @Autowired
-    private FormaPagamentoAssembler formaPagamentoAssembler;
+    private FormaPagamentoModelAssembler formaPagamentoModelAssembler;
 
     @Autowired
     private CadastroFormaPagamentoService cadastroFormaPagamento;
@@ -41,14 +41,14 @@ public class FormaPagamentoController {
 
     @GetMapping
     public List<FormaPagamentoModel> listar() {
-        return formaPagamentoAssembler.toCollectionModel(formaPagamentoRepository.findAll());
+        return formaPagamentoModelAssembler.toCollectionModel(formaPagamentoRepository.findAll());
     }
 
     @GetMapping("{formaPagamentoId}")
     public FormaPagamentoModel buscar(@PathVariable Long formaPagamentoId) {
         FormaPagamento formaPagamento = cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId);
 
-        FormaPagamentoModel formaPagamentoModel = formaPagamentoAssembler.toModel(formaPagamento);
+        FormaPagamentoModel formaPagamentoModel = formaPagamentoModelAssembler.toModel(formaPagamento);
 
         return formaPagamentoModel;
     }
@@ -57,7 +57,7 @@ public class FormaPagamentoController {
     @ResponseStatus(HttpStatus.CREATED)
     public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
         FormaPagamento formaPagamento = formaPagamentoInputDisasembler.toDomainModel(formaPagamentoInput);
-        return formaPagamentoAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamento));
+        return formaPagamentoModelAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamento));
     }
 
     @PutMapping("/{formaPagamentoId}")
@@ -68,7 +68,7 @@ public class FormaPagamentoController {
 
         formaPagamentoInputDisasembler.copyToDomainObject(formaPAgamentoInput, formaPagamentoAtual);
 
-        return formaPagamentoAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamentoAtual));
+        return formaPagamentoModelAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamentoAtual));
     }
 
     @DeleteMapping("/{formaPagamentoId}")
