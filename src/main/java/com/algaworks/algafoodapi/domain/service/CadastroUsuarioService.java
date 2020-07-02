@@ -3,6 +3,7 @@ package com.algaworks.algafoodapi.domain.service;
 import com.algaworks.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafoodapi.domain.exception.NegocioException;
 import com.algaworks.algafoodapi.domain.exception.UsuarioNaoEncontradoException;
+import com.algaworks.algafoodapi.domain.model.Grupo;
 import com.algaworks.algafoodapi.domain.model.Usuario;
 import com.algaworks.algafoodapi.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class CadastroUsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CadastroGrupoService cadastroGrupo;
 
     public Usuario buscarOuFalhar(Long usuarioId) {
         return usuarioRepository.findById(usuarioId)
@@ -63,4 +67,21 @@ public class CadastroUsuarioService {
                     String.format("Usuário de código %d não pode ser removido, pois está em uso", usuarioId));
         }
     }
+
+    @Transactional
+    public void desassociarGrupo(Long usuarioId, Long grupoId) {
+        Usuario usuario = buscarOuFalhar(usuarioId);
+        Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
+
+        usuario.removerGrupo(grupo);
+    }
+
+    @Transactional
+    public void associarGrupo(Long usuarioId, Long grupoId) {
+        Usuario usuario = buscarOuFalhar(usuarioId);
+        Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
+
+        usuario.adicionarGrupo(grupo);
+    }
+
 }
