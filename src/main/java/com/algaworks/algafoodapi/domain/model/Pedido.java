@@ -38,7 +38,7 @@ public class Pedido {
     private Endereco enderecoEntrega; // all not null, except complemento
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.CRIADO;
+    private StatusPedido status = StatusPedido.CRIADO;
 
     @CreationTimestamp
     private OffsetDateTime dataCriacao;
