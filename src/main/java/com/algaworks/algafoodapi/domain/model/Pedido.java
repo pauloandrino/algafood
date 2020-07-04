@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,7 +35,7 @@ public class Pedido {
     private BigDecimal valorTotal;
 
     @Embedded
-    private Endereco endereco; // all not null, except complemento
+    private Endereco enderecoEntrega; // all not null, except complemento
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.CRIADO;
@@ -58,23 +59,18 @@ public class Pedido {
     @JoinColumn(name = "usuario_cliente_id", nullable = false)
     private Usuario cliente;
 
-    @OneToMany(mappedBy = "pedido")
-    private List<ItemPedido> intensPedido;
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<ItemPedido> itens;
 
     public void calcularValorTotal() {
-        this.subtotal = getIntensPedido().stream()
+
+        getItens().forEach(ItemPedido::calcularPrecoTotal);
+
+        this.subtotal = getItens().stream()
                 .map(item -> item.getPrecoTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         this.valorTotal = this.subtotal.add(this.taxaFrete);
-    }
-
-    public void definirFrete() {
-        setTaxaFrete(getRestaurante().getTaxaFrete());
-    }
-
-    public void atribuirPedidoAosItens() {
-        getIntensPedido().forEach(item -> item.setPedido(this));
     }
 
 }
