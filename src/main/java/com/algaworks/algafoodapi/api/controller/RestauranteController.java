@@ -61,6 +61,7 @@ public class RestauranteController {
 
     @Autowired
     RestauranteInputDisasembler restauranteInputDisasembler;
+/*
 
     @GetMapping
     public MappingJacksonValue listar(@RequestParam(required = false) String projecao) {
@@ -79,19 +80,20 @@ public class RestauranteController {
 
         return restaurantesWrapper;
     }
+*/
 
-/*
+
     @JsonView(RestauranteView.Resumo.class)
-    @GetMapping(params = "projecao=resumo")
-    public List<RestauranteModel> listarResumido() {
-        return listar();
+    @GetMapping()
+    public List<RestauranteModel> listar() {
+        return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
     }
 
     @JsonView(RestauranteView.ApenasNome.class)
     @GetMapping(params = "projecao=apenas-nome")
     public List<RestauranteModel> listarApenasNomes() {
         return listar();
-    }*/
+    }
 
     @GetMapping("{restauranteId}")
     public RestauranteModel buscar(@PathVariable Long restauranteId) {
