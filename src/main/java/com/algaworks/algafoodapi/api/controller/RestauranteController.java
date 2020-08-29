@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,10 +63,24 @@ public class RestauranteController {
     RestauranteInputDisasembler restauranteInputDisasembler;
 
     @GetMapping
-    public List<RestauranteModel> listar() {
-        return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
+    public MappingJacksonValue listar(@RequestParam(required = false) String projecao) {
+        List<Restaurante> restaurantes = restauranteRepository.findAll();
+        List<RestauranteModel> restaurantesModel = restauranteModelAssembler.toCollectionModel(restaurantes);
+
+        MappingJacksonValue restaurantesWrapper = new MappingJacksonValue(restaurantesModel);
+
+        restaurantesWrapper.setSerializationView(RestauranteView.Resumo.class);
+
+        if ("apenas-nome".equals(projecao)) {
+            restaurantesWrapper.setSerializationView(RestauranteView.ApenasNome.class);
+        } else if ("completo".equals(projecao)) {
+            restaurantesWrapper.setSerializationView(null);
+        }
+
+        return restaurantesWrapper;
     }
 
+/*
     @JsonView(RestauranteView.Resumo.class)
     @GetMapping(params = "projecao=resumo")
     public List<RestauranteModel> listarResumido() {
@@ -75,7 +91,7 @@ public class RestauranteController {
     @GetMapping(params = "projecao=apenas-nome")
     public List<RestauranteModel> listarApenasNomes() {
         return listar();
-    }
+    }*/
 
     @GetMapping("{restauranteId}")
     public RestauranteModel buscar(@PathVariable Long restauranteId) {
