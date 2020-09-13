@@ -1,5 +1,7 @@
 package com.algaworks.algafoodapi.domain.repository;
 
+import com.algaworks.algafoodapi.api.model.dto.VendaDiaria;
+import com.algaworks.algafoodapi.domain.filter.VendaDiariaFilter;
 import com.algaworks.algafoodapi.domain.model.Pedido;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
