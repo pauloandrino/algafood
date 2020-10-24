@@ -15,6 +15,7 @@ DELETE FROM usuario_grupo;
 DELETE FROM restaurante_usuario_responsavel;
 delete from pedido;
 delete from item_pedido;
+delete from foto_produto;
 
 SET foreign_key_checks = 1;
 
