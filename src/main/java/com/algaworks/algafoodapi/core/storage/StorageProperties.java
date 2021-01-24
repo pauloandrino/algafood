@@ -34,6 +34,7 @@ public class StorageProperties {
         private String bucket;
         private Regions region;
         private String diretorioFotos;
+        private String endPointUrl;
 
     }
 }
