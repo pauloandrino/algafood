@@ -3,12 +3,10 @@ package com.algaworks.algafoodapi.infrastructure.service.storage;
 import com.algaworks.algafoodapi.core.storage.StorageProperties;
 import com.algaworks.algafoodapi.domain.service.FotoStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -19,10 +17,15 @@ public class LocalFotoStorageService implements FotoStorageService {
     private StorageProperties storageProperties;
 
     @Override
-    public InputStream recuperar(String nomeArquivo) {
-        Path arquivoPath = getArquivoPath(nomeArquivo);
+    public FotoRecuperada recuperar(String nomeArquivo) {
         try {
-            return  Files.newInputStream(arquivoPath);
+            Path arquivoPath = getArquivoPath(nomeArquivo);
+
+            FotoRecuperada fotoRecuperada = FotoRecuperada.builder()
+                    .inputStream(Files.newInputStream(arquivoPath))
+                    .build();
+
+            return fotoRecuperada;
         } catch (IOException e) {
             throw new StorageException("Não foi possível recuperar arquivo", e);
         }
