@@ -3,17 +3,13 @@ package com.algaworks.algafoodapi.infrastructure.service.email;
 import com.algaworks.algafoodapi.core.email.EmailProperties;
 import com.algaworks.algafoodapi.domain.service.EnvioEmailService;
 import freemarker.template.Configuration;
-import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 
-@Service
 public class SmtpEnvioEmailService implements EnvioEmailService {
 
     @Autowired
@@ -45,7 +41,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
         }
     }
 
-    private String processarTemplate(Mensagem mensagem) {
+    protected String processarTemplate(Mensagem mensagem) {
         try {
             var template = freeMarkerConfig.getTemplate(mensagem.getCorpo());
 

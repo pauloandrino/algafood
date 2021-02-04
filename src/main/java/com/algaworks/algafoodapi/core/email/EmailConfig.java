@@ -1,5 +1,8 @@
 package com.algaworks.algafoodapi.core.email;
 
+import com.algaworks.algafoodapi.domain.service.EnvioEmailService;
+import com.algaworks.algafoodapi.infrastructure.service.email.FakeEnvioEmailService;
+import com.algaworks.algafoodapi.infrastructure.service.email.SmtpEnvioEmailService;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -17,6 +20,21 @@ public class EmailConfig {
 
     @Autowired
     EmailConfigProperties emailConfigProperties;
+
+    @Autowired
+    EmailProperties emailProperties;
+
+    @Bean
+    public EnvioEmailService envioEmailService() {
+        switch (emailProperties.getImpl()) {
+            case FAKE:
+                return new FakeEnvioEmailService();
+            case SMTP:
+                return new SmtpEnvioEmailService();
+            default:
+                return null;
+        }
+    }
 
     @Bean
     public AmazonSimpleEmailService amazonSimpleEmailService() {
