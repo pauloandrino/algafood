@@ -11,8 +11,8 @@ services:
       - TZ=America/Sao_Paulo
     ports:
       - "3306:3306"
-    volumes:
-      - c:/projetos/tempdocker/mysql-algafood
+#    volumes:
+#      - c:/projetos/tempdocker/mysql-algafood
 
   localstack:
     container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
