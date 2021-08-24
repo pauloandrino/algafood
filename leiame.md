@@ -8,9 +8,12 @@ Projeto de estudo do curso Especialista Rest da Algaworks.
 
 #####Run mySql in docker:
 
-Run docker compose
+Run docker compose (**docker-compose.yaml**) located on root. 
 
-(@Deprecated) docker run --name algafood-sql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=algafooddb -e TZ=America/Sao_Paulo -p 3306:3306 -d mysql:latest
+(@Deprecated)
+
+~~docker run --name algafood-sql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=algafooddb -e TZ=America/Sao_Paulo -p 3306:3306 -d mysql:latest~~
+
 
 
 
@@ -48,3 +51,10 @@ aws --endpoint-url=http://localhost:4566 ses verify-email-identity --email-addre
 ```
 aws --endpoint-url=http://localhost:4566 ses send-email --from sender@example.com --destination file://destination.json --message file://message.json
 ```
+
+#### UP Http server for web client 
+https://www.npmjs.com/package/http-server
+
+`
+http-server -p 8000
+`
