@@ -8,8 +8,10 @@ import com.algaworks.algafoodapi.domain.model.FormaPagamento;
 import com.algaworks.algafoodapi.domain.repository.FormaPagamentoRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroFormaPagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/formasPagamento", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,8 +43,11 @@ public class FormaPagamentoController {
     private FormaPagamentoInputDisasembler formaPagamentoInputDisasembler;
 
     @GetMapping
-    public List<FormaPagamentoModel> listar() {
-        return formaPagamentoModelAssembler.toCollectionModel(formaPagamentoRepository.findAll());
+    public ResponseEntity<List<FormaPagamentoModel>> listar() {
+        List<FormaPagamentoModel> formaPagamentoModels = formaPagamentoModelAssembler.toCollectionModel(formaPagamentoRepository.findAll());
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+                .body(formaPagamentoModels);
     }
 
     @GetMapping("{formaPagamentoId}")
