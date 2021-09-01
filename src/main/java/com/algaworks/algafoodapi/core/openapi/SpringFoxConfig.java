@@ -50,7 +50,9 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .apiInfo(apiInfo())
                 .tags(  new Tag("Cidades", "Gerencia cidades"),
-                        new Tag("Grupos", "Gerencia os grupos de usuários"));
+                        new Tag("Grupos", "Gerencia os grupos de usuários"),
+                        new Tag("Cozinhas", "Gerencia as cozinhas")
+                );
     }
 
     private List<ResponseMessage> globalGetResponseMessages() {
