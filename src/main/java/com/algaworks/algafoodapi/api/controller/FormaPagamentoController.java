@@ -2,6 +2,7 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.FormaPagamentoModelAssembler;
 import com.algaworks.algafoodapi.api.assembler.FormaPagamentoInputDisasembler;
+import com.algaworks.algafoodapi.api.controller.openapi.FormaPagamentoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoInput;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
 import com.algaworks.algafoodapi.domain.model.FormaPagamento;
@@ -30,8 +31,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping(value = "/formasPagamento", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FormaPagamentoController {
+@RequestMapping(path = "/formasPagamento", produces = MediaType.APPLICATION_JSON_VALUE)
+public class FormaPagamentoController implements FormaPagamentoControllerOpenApi {
 
     @Autowired
     FormaPagamentoRepository formaPagamentoRepository;
@@ -53,11 +54,11 @@ public class FormaPagamentoController {
 
         var dataUltimaAtualizacao = formaPagamentoRepository.getDataUltimaAtualizacao();
 
-        if(dataUltimaAtualizacao != null) {
+        if (dataUltimaAtualizacao != null) {
             eTag = String.valueOf((dataUltimaAtualizacao.toEpochSecond()));
         }
 
-        if(request.checkNotModified(eTag)) {
+        if (request.checkNotModified(eTag)) {
             return null;
         }
 

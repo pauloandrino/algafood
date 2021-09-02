@@ -51,9 +51,10 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .ignoredParameterTypes(ServletWebRequest.class)
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .apiInfo(apiInfo())
-                .tags(  new Tag("Cidades", "Gerencia cidades"),
+                .tags(new Tag("Cidades", "Gerencia cidades"),
                         new Tag("Grupos", "Gerencia os grupos de usuários"),
-                        new Tag("Cozinhas", "Gerencia as cozinhas")
+                        new Tag("Cozinhas", "Gerencia as cozinhas"),
+                        new Tag("Formas de pagamento", "Gerencia as formas de pagamento")
                 );
     }
 
