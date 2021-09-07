@@ -1,6 +1,7 @@
-package com.algaworks.algafoodapi.api.controller.openapi.model;
+package com.algaworks.algafoodapi.api.controller.openapi;
 
 import com.algaworks.algafoodapi.api.ExceptionHandler.Problem;
+import com.algaworks.algafoodapi.api.controller.openapi.model.RestauranteBasicoModelOpenApi;
 import com.algaworks.algafoodapi.api.model.RestauranteModel;
 import com.algaworks.algafoodapi.api.model.input.RestauranteInput;
 import com.algaworks.algafoodapi.api.view.RestauranteView;

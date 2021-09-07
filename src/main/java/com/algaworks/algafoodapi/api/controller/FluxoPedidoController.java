@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.api.controller;
 
-import com.algaworks.algafoodapi.api.controller.openapi.model.FluxoPedidoControllerOpenApi;
+import com.algaworks.algafoodapi.api.controller.openapi.FluxoPedidoControllerOpenApi;
 import com.algaworks.algafoodapi.domain.service.FluxoPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

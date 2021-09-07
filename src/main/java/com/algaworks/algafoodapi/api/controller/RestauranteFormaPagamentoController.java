@@ -1,7 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.FormaPagamentoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.model.RestauranteFormaPagamentoControllerOpenApi;
+import com.algaworks.algafoodapi.api.controller.openapi.RestauranteFormaPagamentoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.domain.service.CadastroRestauranteService;

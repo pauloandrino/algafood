@@ -1,7 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.UsuarioModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.model.RestauranteUsuarioResponsavelControllerOpenApi;
+import com.algaworks.algafoodapi.api.controller.openapi.RestauranteUsuarioResponsavelControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.UsuarioModel;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.domain.service.CadastroRestauranteService;

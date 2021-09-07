@@ -2,7 +2,7 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.RestauranteInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.RestauranteModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.model.RestauranteControllerOpenApi;
+import com.algaworks.algafoodapi.api.controller.openapi.RestauranteControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.RestauranteModel;
 import com.algaworks.algafoodapi.api.model.input.RestauranteInput;
 import com.algaworks.algafoodapi.api.view.RestauranteView;
