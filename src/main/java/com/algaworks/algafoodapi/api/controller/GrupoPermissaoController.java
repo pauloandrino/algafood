@@ -1,6 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.PermissaoModelAssembler;
+import com.algaworks.algafoodapi.api.controller.openapi.GrupoPermissaoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import com.algaworks.algafoodapi.domain.model.Grupo;
 import com.algaworks.algafoodapi.domain.service.CadastroGrupoService;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
-public class GrupoPermissaoController {
+public class GrupoPermissaoController implements GrupoPermissaoControllerOpenApi {
 
     @Autowired
     private CadastroGrupoService cadastroGrupo;
