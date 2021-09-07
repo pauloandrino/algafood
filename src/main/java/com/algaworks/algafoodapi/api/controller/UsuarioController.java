@@ -2,10 +2,11 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.UsuarioInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.UsuarioModelAssembler;
-import com.algaworks.algafoodapi.api.model.input.SenhaInput;
-import com.algaworks.algafoodapi.api.model.input.UsuarioInput;
+import com.algaworks.algafoodapi.api.controller.openapi.UsuarioControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.UsuarioModel;
+import com.algaworks.algafoodapi.api.model.input.SenhaInput;
 import com.algaworks.algafoodapi.api.model.input.UsuarioComSenhaInput;
+import com.algaworks.algafoodapi.api.model.input.UsuarioInput;
 import com.algaworks.algafoodapi.domain.model.Usuario;
 import com.algaworks.algafoodapi.domain.repository.UsuarioRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroUsuarioService;
@@ -27,7 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsuarioController {
+public class UsuarioController implements UsuarioControllerOpenApi {
 
     @Autowired
     UsuarioRepository usuarioRepository;
