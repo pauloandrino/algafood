@@ -2,6 +2,7 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.EstadoInputDisassembler;
 import com.algaworks.algafoodapi.api.assembler.EstadoModelAssembler;
+import com.algaworks.algafoodapi.api.controller.openapi.model.EstadoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.EstadoModel;
 import com.algaworks.algafoodapi.api.model.input.EstadoInput;
 import com.algaworks.algafoodapi.domain.model.Estado;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estados")
-public class EstadoController {
+public class EstadoController implements EstadoControllerOpenApi {
 
     @Autowired
     private EstadoRepository estadoRepository;
