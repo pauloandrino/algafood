@@ -1,5 +1,6 @@
 package com.algaworks.algafoodapi.api.controller;
 
+import com.algaworks.algafoodapi.api.ResourceUriHelper;
 import com.algaworks.algafoodapi.api.assembler.CidadeInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.CidadeModelAssembler;
 import com.algaworks.algafoodapi.api.controller.openapi.CidadeControllerOpenApi;
@@ -12,6 +13,7 @@ import com.algaworks.algafoodapi.domain.model.Cidade;
 import com.algaworks.algafoodapi.domain.repository.CidadeRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroCidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,8 +25,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController()
@@ -60,7 +67,11 @@ public class CidadeController implements CidadeControllerOpenApi {
     public CidadeModel adicionar(@RequestBody @Valid CidadeInput cidadeInput) {
         try {
             Cidade cidade = cidadeInputDisasembler.toDomainObject(cidadeInput);
-            return cidadeModelAssembler.toModel(cadastroCidade.salvar(cidade));
+            var cidadeModel = cidadeModelAssembler.toModel(cadastroCidade.salvar(cidade));
+
+            ResourceUriHelper.addUriResponseHeader(cidadeModel.getId());
+
+            return cidadeModel;
         } catch (EntidadeNaoEncontradaException e) {
             throw new NegocioException(e.getMessage(), e);
         }
