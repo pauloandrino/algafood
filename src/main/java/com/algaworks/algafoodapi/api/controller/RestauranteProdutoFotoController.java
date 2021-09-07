@@ -1,6 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.FotoProdutoModelAssembler;
+import com.algaworks.algafoodapi.api.controller.openapi.RestauranteProdutoFotoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.FotoProdutoModel;
 import com.algaworks.algafoodapi.api.model.input.FotoProdutoInput;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
@@ -28,12 +29,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
-public class RestauranteProdutoFotoController {
+@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto",
+        produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestauranteProdutoFotoController implements RestauranteProdutoFotoControllerOpenApi {
 
     @Autowired
     private CadastroProdutoService cadastroProduto;
@@ -69,7 +70,7 @@ public class RestauranteProdutoFotoController {
         return fotoProdutoModelAssembler.toModel(fotoSalva);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
     public FotoProdutoModel buscar(@PathVariable Long restauranteId,
                                    @PathVariable Long produtoId) {
         FotoProduto fotoProduto = catalogoFotoProduto.buscarOuFalhar(restauranteId, produtoId);
@@ -78,10 +79,10 @@ public class RestauranteProdutoFotoController {
 
     }
 
-    @GetMapping()
+    @GetMapping(produces = MediaType.ALL_VALUE)
     public ResponseEntity<?> servir(@PathVariable Long restauranteId,
-                                                      @PathVariable Long produtoId,
-                                                      @RequestHeader(name = "accept") String acceptHeader)
+                                    @PathVariable Long produtoId,
+                                    @RequestHeader(name = "accept") String acceptHeader)
             throws HttpMediaTypeNotAcceptableException {
 
         try {
