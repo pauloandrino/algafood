@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/produtos")
-public class RestauranteProdutoController {
+public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi {
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -45,7 +45,7 @@ public class RestauranteProdutoController {
 
     @GetMapping
     public List<ProdutoModel> listar(@PathVariable Long restauranteId,
-            @RequestParam(required = false) boolean inluirInativos) {
+                                     @RequestParam(required = false) boolean inluirInativos) {
         Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 
         List<Produto> todosProdutos = null;
