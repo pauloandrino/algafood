@@ -1,6 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.FormaPagamentoModelAssembler;
+import com.algaworks.algafoodapi.api.controller.openapi.model.RestauranteFormaPagamentoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.domain.service.CadastroRestauranteService;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/restaurantes/{restauranteId}/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteFormaPagamentoController {
+public class RestauranteFormaPagamentoController implements RestauranteFormaPagamentoControllerOpenApi {
 
     @Autowired
     CadastroRestauranteService cadastroRestaurante;
