@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.core.openapi;
+package com.algaworks.algafoodapi.core.springfox;
 
 import com.algaworks.algafoodapi.api.ExceptionHandler.Problem;
 import com.algaworks.algafoodapi.api.controller.openapi.model.CozinhasModelOpenApi;
