@@ -64,9 +64,7 @@ public class CidadeController implements CidadeControllerOpenApi {
 
         var cidadeModel = cidadeModelAssembler.toModel(cidade);
 
-//        cidadeModel.add(new Link("http://api.algafood.local:8080/cidades/1", IanaLinkRelations.SELF));
         cidadeModel.add(new Link("http://api.algafood.local:8080/cidades/1"));
-//        cidadeModel.add(new Link("http://api.algafood.local:8080/cidades", IanaLinkRelations.COLLECTION));
         cidadeModel.add(new Link("http://api.algafood.local:8080/cidades", "cidades"));
         cidadeModel.getEstado().add(new Link("http://api.algafood.local:8080/estados/1"));
 
