@@ -3,13 +3,16 @@ package com.algaworks.algafoodapi.api.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+@Relation(collectionRelation = "pedidos")
 @Getter
 @Setter
-public class PedidoResumoModel {
+public class PedidoResumoModel extends RepresentationModel<PedidoResumoModel> {
 
     @ApiModelProperty(example = "f9981ca4-5a5e-4da3-af04-933861df3e55")
     private String codigo;
@@ -28,5 +31,9 @@ public class PedidoResumoModel {
 
     @ApiModelProperty(example = "2019-12-01T20:34:04Z")
     private OffsetDateTime dataCriacao;
+
+    private RestauranteResumoModel restaurante;
+
+    private UsuarioModel cliente;
 
 }
