@@ -51,49 +51,13 @@ public class CidadeController implements CidadeControllerOpenApi {
     @GetMapping
     public CollectionModel<CidadeModel> listar() {
         List<Cidade> cidades = cidadeRepository.findAll();
-
-        var cidadesModel = cidadeModelAssembler.toCollectionModel(cidades);
-
-        cidadesModel.forEach(cidadeModel -> {
-            cidadeModel.add(linkTo(methodOn(CidadeController.class)
-                    .buscar(cidadeModel.getId()))
-                    .withSelfRel());
-
-            cidadeModel.add(linkTo(methodOn(CidadeController.class)
-                    .listar())
-                    .withRel("cidades"));
-
-            cidadeModel.getEstado().add(linkTo(methodOn(EstadoController.class)
-                    .buscar(cidadeModel.getEstado().getId()))
-                    .withSelfRel());
-        });
-
-        var cidadeCollectionsModel = new CollectionModel<CidadeModel>(cidadesModel);
-
-        cidadeCollectionsModel.add(linkTo(CidadeController.class).withSelfRel());
-
-        return cidadeCollectionsModel;
+        return cidadeModelAssembler.toCollectionModel(cidades);
     }
 
     @GetMapping("{cidadeId}")
     public CidadeModel buscar(@PathVariable Long cidadeId) {
         Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId);
-
-        var cidadeModel = cidadeModelAssembler.toModel(cidade);
-
-        cidadeModel.add(linkTo(methodOn(CidadeController.class)
-                .buscar(cidadeModel.getId()))
-                .withSelfRel());
-
-        cidadeModel.add(linkTo(methodOn(CidadeController.class)
-                .listar())
-                .withRel("cidades"));
-
-        cidadeModel.getEstado().add(linkTo(methodOn(EstadoController.class)
-                .buscar(cidadeModel.getEstado().getId()))
-                .withSelfRel());
-
-        return cidadeModel;
+        return cidadeModelAssembler.toModel(cidade);
     }
 
     @PostMapping
