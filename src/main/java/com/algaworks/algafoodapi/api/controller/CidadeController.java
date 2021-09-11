@@ -13,6 +13,7 @@ import com.algaworks.algafoodapi.domain.model.Cidade;
 import com.algaworks.algafoodapi.domain.repository.CidadeRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroCidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,9 +49,30 @@ public class CidadeController implements CidadeControllerOpenApi {
     private CidadeInputDisasembler cidadeInputDisasembler;
 
     @GetMapping
-    public List<CidadeModel> listar() {
+    public CollectionModel<CidadeModel> listar() {
         List<Cidade> cidades = cidadeRepository.findAll();
-        return cidadeModelAssembler.toCollectionModel(cidades);
+
+        var cidadesModel = cidadeModelAssembler.toCollectionModel(cidades);
+
+        cidadesModel.forEach(cidadeModel -> {
+            cidadeModel.add(linkTo(methodOn(CidadeController.class)
+                    .buscar(cidadeModel.getId()))
+                    .withSelfRel());
+
+            cidadeModel.add(linkTo(methodOn(CidadeController.class)
+                    .listar())
+                    .withRel("cidades"));
+
+            cidadeModel.getEstado().add(linkTo(methodOn(EstadoController.class)
+                    .buscar(cidadeModel.getEstado().getId()))
+                    .withSelfRel());
+        });
+
+        var cidadeCollectionsModel = new CollectionModel<CidadeModel>(cidadesModel);
+
+        cidadeCollectionsModel.add(linkTo(CidadeController.class).withSelfRel());
+
+        return cidadeCollectionsModel;
     }
 
     @GetMapping("{cidadeId}")

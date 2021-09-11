@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.hateoas.CollectionModel;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public interface CidadeControllerOpenApi {
 
     @ApiOperation("Lista as cidades")
-    List<CidadeModel> listar();
+    CollectionModel<CidadeModel> listar();
 
     @ApiOperation("Busca cidade por ID")
     @ApiResponses({
