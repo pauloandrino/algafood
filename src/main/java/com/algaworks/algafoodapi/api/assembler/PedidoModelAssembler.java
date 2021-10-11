@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.TemplateVariable.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
@@ -39,14 +40,21 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
         modelMapper.map(pedido, pedidoModel);
 
         var pageVariables = new TemplateVariables(
-                new TemplateVariable("page", TemplateVariable.VariableType.REQUEST_PARAM),
-                new TemplateVariable("size", TemplateVariable.VariableType.REQUEST_PARAM),
-                new TemplateVariable("sort", TemplateVariable.VariableType.REQUEST_PARAM)
+                new TemplateVariable("page", VariableType.REQUEST_PARAM),
+                new TemplateVariable("size", VariableType.REQUEST_PARAM),
+                new TemplateVariable("sort", VariableType.REQUEST_PARAM)
         );
+
+        var filtroVariables = new TemplateVariables(
+                new TemplateVariable("clienteId", VariableType.REQUEST_PARAM),
+                new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoInicio", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoFim", VariableType.REQUEST_PARAM));
 
         var pedidosUrl = linkTo(PedidoController.class).toUri().toString();
 
-        pedidoModel.add(new Link(UriTemplate.of(pedidosUrl, pageVariables), "pedidos"));
+        pedidoModel.add(new Link(UriTemplate.of(pedidosUrl,
+                pageVariables.concat(filtroVariables)), "pedidos"));
 
         pedidoModel.getRestaurante().add(linkTo(methodOn(RestauranteController.class)
                 .buscar(pedido.getRestaurante().getId())).withSelfRel());
