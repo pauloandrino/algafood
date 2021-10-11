@@ -1,29 +1,16 @@
 package com.algaworks.algafoodapi.api.assembler;
 
 import com.algaworks.algafoodapi.api.AlgaLinks;
-import com.algaworks.algafoodapi.api.controller.CidadeController;
-import com.algaworks.algafoodapi.api.controller.FormaPagamentoController;
 import com.algaworks.algafoodapi.api.controller.PedidoController;
-import com.algaworks.algafoodapi.api.controller.RestauranteController;
-import com.algaworks.algafoodapi.api.controller.RestauranteProdutoController;
-import com.algaworks.algafoodapi.api.controller.UsuarioController;
 import com.algaworks.algafoodapi.api.model.PedidoModel;
 import com.algaworks.algafoodapi.domain.model.Pedido;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.TemplateVariable;
-import org.springframework.hateoas.TemplateVariables;
-import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.hateoas.TemplateVariable.*;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
 public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pedido, PedidoModel> {
@@ -44,6 +31,9 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
         modelMapper.map(pedido, pedidoModel);
 
         pedidoModel.add(algaLinks.linkToPedidos());
+        pedidoModel.add(algaLinks.linkToConfirmacaoPedido(pedidoModel.getCodigo(), "confirmar"));
+        pedidoModel.add(algaLinks.linkToCacncelamentoPedido(pedidoModel.getCodigo(), "cancelar"));
+        pedidoModel.add(algaLinks.linkToEntregaPedido(pedidoModel.getCodigo(), "entregar"));
 
         pedidoModel.getRestaurante().add(
                 algaLinks.linkToRestaurante(pedido.getRestaurante().getId()));

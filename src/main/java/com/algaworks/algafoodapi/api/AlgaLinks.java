@@ -3,6 +3,7 @@ package com.algaworks.algafoodapi.api;
 import com.algaworks.algafoodapi.api.controller.CidadeController;
 import com.algaworks.algafoodapi.api.controller.CozinhaController;
 import com.algaworks.algafoodapi.api.controller.EstadoController;
+import com.algaworks.algafoodapi.api.controller.FluxoPedidoController;
 import com.algaworks.algafoodapi.api.controller.FormaPagamentoController;
 import com.algaworks.algafoodapi.api.controller.PedidoController;
 import com.algaworks.algafoodapi.api.controller.RestauranteController;
@@ -39,6 +40,21 @@ public class AlgaLinks {
 
         return new Link(UriTemplate.of(pedidosUrl,
                 PAGINACAO_VARIABLES.concat(filtroVariables)), "pedidos");
+    }
+
+    public Link linkToConfirmacaoPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(FluxoPedidoController.class)
+                .confirmar(codigoPedido)).withRel(rel);
+    }
+
+    public Link linkToEntregaPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(FluxoPedidoController.class)
+                .entregar(codigoPedido)).withRel(rel);
+    }
+
+    public Link linkToCacncelamentoPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(FluxoPedidoController.class)
+                .cancelar(codigoPedido)).withRel(rel);
     }
 
     public Link linkToRestaurante(Long restauranteId, String rel) {
