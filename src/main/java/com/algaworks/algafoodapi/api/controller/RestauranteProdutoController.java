@@ -1,5 +1,6 @@
 package com.algaworks.algafoodapi.api.controller;
 
+import com.algaworks.algafoodapi.api.AlgaLinks;
 import com.algaworks.algafoodapi.api.assembler.ProdutoInputDisassembler;
 import com.algaworks.algafoodapi.api.assembler.ProdutoModelAssembler;
 import com.algaworks.algafoodapi.api.model.ProdutoModel;
@@ -10,6 +11,7 @@ import com.algaworks.algafoodapi.domain.repository.ProdutoRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroProdutoService;
 import com.algaworks.algafoodapi.domain.service.CadastroRestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,20 +45,25 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
     @Autowired
     private ProdutoInputDisassembler produtoInputDisassembler;
 
+    @Autowired
+    private AlgaLinks algaLinks;
+
+    @Override
     @GetMapping
-    public List<ProdutoModel> listar(@PathVariable Long restauranteId,
-                                     @RequestParam(required = false) boolean inluirInativos) {
+    public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId,
+                                                @RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
         Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 
         List<Produto> todosProdutos = null;
 
-        if (inluirInativos) {
+        if (incluirInativos) {
             todosProdutos = produtoRepository.findByRestaurante(restaurante);
         } else {
             todosProdutos = produtoRepository.findAtivosByRestaurante(restaurante);
         }
 
-        return produtoModelAssembler.toCollectionModel(todosProdutos);
+        return produtoModelAssembler.toCollectionModel(todosProdutos)
+                .add(algaLinks.linkToProdutos(restauranteId));
     }
 
     @GetMapping("/{produtoId}")
