@@ -3,6 +3,7 @@ package com.algaworks.algafoodapi.api;
 import com.algaworks.algafoodapi.api.controller.CidadeController;
 import com.algaworks.algafoodapi.api.controller.CozinhaController;
 import com.algaworks.algafoodapi.api.controller.EstadoController;
+import com.algaworks.algafoodapi.api.controller.EstatisticasController;
 import com.algaworks.algafoodapi.api.controller.FluxoPedidoController;
 import com.algaworks.algafoodapi.api.controller.FormaPagamentoController;
 import com.algaworks.algafoodapi.api.controller.GrupoController;
@@ -319,5 +320,22 @@ public class AlgaLinks {
     public Link linkToUsuarioGrupoDesassociacao(Long usuarioId, Long grupoId, String rel) {
         return linkTo(methodOn(UsuarioGrupoController.class)
                 .desassociar(usuarioId, grupoId)).withRel(rel);
+    }
+
+    public Link linkToEstatisticas(String rel) {
+        return linkTo(EstatisticasController.class).withRel(rel);
+    }
+
+    public Link linkToEstatisticasVendasDiarias(String rel) {
+        TemplateVariables filtroVariables = new TemplateVariables(
+                new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoInicio", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoFim", VariableType.REQUEST_PARAM),
+                new TemplateVariable("timeOffset", VariableType.REQUEST_PARAM));
+
+        String pedidosUrl = linkTo(methodOn(EstatisticasController.class)
+                .consultarVendasDiarias(null, null)).toUri().toString();
+
+        return new Link(UriTemplate.of(pedidosUrl, filtroVariables), rel);
     }
 }
