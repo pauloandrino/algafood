@@ -1,7 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.AlgaLinks;
-import com.algaworks.algafoodapi.api.controller.openapi.EstatisticasControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.EstatisticasControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.dto.VendaDiaria;
 import com.algaworks.algafoodapi.domain.filter.VendaDiariaFilter;
 import com.algaworks.algafoodapi.domain.service.VendaQueryService;

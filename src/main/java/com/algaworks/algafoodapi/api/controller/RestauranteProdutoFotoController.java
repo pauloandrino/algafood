@@ -1,7 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.FotoProdutoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.RestauranteProdutoFotoControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.RestauranteProdutoFotoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.FotoProdutoModel;
 import com.algaworks.algafoodapi.api.model.input.FotoProdutoInput;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;

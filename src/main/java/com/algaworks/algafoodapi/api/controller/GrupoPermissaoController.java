@@ -2,7 +2,7 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.AlgaLinks;
 import com.algaworks.algafoodapi.api.assembler.PermissaoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.GrupoPermissaoControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.GrupoPermissaoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import com.algaworks.algafoodapi.domain.model.Grupo;
 import com.algaworks.algafoodapi.domain.service.CadastroGrupoService;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)

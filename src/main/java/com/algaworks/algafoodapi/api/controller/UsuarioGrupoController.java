@@ -2,8 +2,7 @@ package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.AlgaLinks;
 import com.algaworks.algafoodapi.api.assembler.GrupoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.GrupoControllerOpenApi;
-import com.algaworks.algafoodapi.api.controller.openapi.UsuarioGrupoControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.UsuarioGrupoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.GrupoModel;
 import com.algaworks.algafoodapi.domain.model.Usuario;
 import com.algaworks.algafoodapi.domain.service.CadastroUsuarioService;

@@ -3,7 +3,7 @@ package com.algaworks.algafoodapi.api.controller;
 import com.algaworks.algafoodapi.api.assembler.PedidoInputDisassembler;
 import com.algaworks.algafoodapi.api.assembler.PedidoModelAssembler;
 import com.algaworks.algafoodapi.api.assembler.PedidoResumoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.PedidoControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.PedidoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.PedidoModel;
 import com.algaworks.algafoodapi.api.model.PedidoResumoModel;
 import com.algaworks.algafoodapi.api.model.input.PedidoInput;

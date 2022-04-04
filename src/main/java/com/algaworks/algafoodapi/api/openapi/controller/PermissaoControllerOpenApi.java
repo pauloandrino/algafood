@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.api.controller.openapi;
+package com.algaworks.algafoodapi.api.openapi.controller;
 
 import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import io.swagger.annotations.Api;

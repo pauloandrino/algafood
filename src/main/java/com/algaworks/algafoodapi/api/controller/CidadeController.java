@@ -3,7 +3,7 @@ package com.algaworks.algafoodapi.api.controller;
 import com.algaworks.algafoodapi.api.ResourceUriHelper;
 import com.algaworks.algafoodapi.api.assembler.CidadeInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.CidadeModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.CidadeControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.CidadeControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.CidadeModel;
 import com.algaworks.algafoodapi.api.model.input.CidadeInput;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
@@ -30,7 +30,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController()
 @RequestMapping(path = "/cidades", produces = MediaType.APPLICATION_JSON_VALUE)

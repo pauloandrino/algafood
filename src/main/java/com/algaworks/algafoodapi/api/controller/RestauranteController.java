@@ -4,7 +4,7 @@ import com.algaworks.algafoodapi.api.assembler.RestauranteApenasNomeModelAssembl
 import com.algaworks.algafoodapi.api.assembler.RestauranteBasicoModelAssembler;
 import com.algaworks.algafoodapi.api.assembler.RestauranteInputDisasembler;
 import com.algaworks.algafoodapi.api.assembler.RestauranteModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.RestauranteControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.RestauranteControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.RestauranteApenasNomeModel;
 import com.algaworks.algafoodapi.api.model.RestauranteBasicoModel;
 import com.algaworks.algafoodapi.api.model.RestauranteModel;

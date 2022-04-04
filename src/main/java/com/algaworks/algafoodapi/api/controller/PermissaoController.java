@@ -1,7 +1,7 @@
 package com.algaworks.algafoodapi.api.controller;
 
 import com.algaworks.algafoodapi.api.assembler.PermissaoModelAssembler;
-import com.algaworks.algafoodapi.api.controller.openapi.PermissaoControllerOpenApi;
+import com.algaworks.algafoodapi.api.openapi.controller.PermissaoControllerOpenApi;
 import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import com.algaworks.algafoodapi.domain.model.Permissao;
 import com.algaworks.algafoodapi.domain.repository.PermissaoRepository;
