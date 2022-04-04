@@ -6,6 +6,8 @@ import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
 import com.algaworks.algafoodapi.api.model.GrupoModel;
 import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import com.algaworks.algafoodapi.api.model.ProdutoModel;
+import com.algaworks.algafoodapi.api.model.RestauranteBasicoModel;
+import com.algaworks.algafoodapi.api.model.UsuarioModel;
 import com.algaworks.algafoodapi.api.openapi.model.CidadesModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.CozinhasModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.EstadosModelOpenApi;
@@ -19,6 +21,8 @@ import com.algaworks.algafoodapi.api.model.LinksModelOpenApi;
 import com.algaworks.algafoodapi.api.model.PedidoResumoModel;
 import com.algaworks.algafoodapi.api.openapi.model.PermissoesModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.ProdutosModelOpenApi;
+import com.algaworks.algafoodapi.api.openapi.model.RestaurantesBasicoModelOpenApi;
+import com.algaworks.algafoodapi.api.openapi.model.UsuariosModelOpenApi;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -110,6 +114,12 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, ProdutoModel.class),
                         ProdutosModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, RestauranteBasicoModel.class),
+                        RestaurantesBasicoModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, UsuarioModel.class),
+                        UsuariosModelOpenApi.class))
                 .apiInfo(apiInfo())
                 .tags(new Tag("Cidades", "Gerencia as cidades"),
                         new Tag("Grupos", "Gerencia os grupos de usuários"),
