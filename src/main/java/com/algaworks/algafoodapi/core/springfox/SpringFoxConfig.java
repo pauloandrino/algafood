@@ -3,15 +3,20 @@ package com.algaworks.algafoodapi.core.springfox;
 import com.algaworks.algafoodapi.api.ExceptionHandler.Problem;
 import com.algaworks.algafoodapi.api.model.EstadoModel;
 import com.algaworks.algafoodapi.api.model.FormaPagamentoModel;
+import com.algaworks.algafoodapi.api.model.GrupoModel;
+import com.algaworks.algafoodapi.api.model.PermissaoModel;
 import com.algaworks.algafoodapi.api.openapi.model.CidadesModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.CozinhasModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.EstadosModelOpenApi;
+import com.algaworks.algafoodapi.api.openapi.model.FormasPagamentoModelOpenApi;
+import com.algaworks.algafoodapi.api.openapi.model.GruposModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.PageableModelOpenApi;
 import com.algaworks.algafoodapi.api.openapi.model.PedidosResumoModelOpenApi;
 import com.algaworks.algafoodapi.api.model.CidadeModel;
 import com.algaworks.algafoodapi.api.model.CozinhaModel;
 import com.algaworks.algafoodapi.api.model.LinksModelOpenApi;
 import com.algaworks.algafoodapi.api.model.PedidoResumoModel;
+import com.algaworks.algafoodapi.api.openapi.model.PermissoesModelOpenApi;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -91,6 +96,12 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, FormaPagamentoModel.class),
                         FormasPagamentoModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, GrupoModel.class),
+                        GruposModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, PermissaoModel.class),
+                        PermissoesModelOpenApi.class))
                 .apiInfo(apiInfo())
                 .tags(new Tag("Cidades", "Gerencia as cidades"),
                         new Tag("Grupos", "Gerencia os grupos de usuários"),
