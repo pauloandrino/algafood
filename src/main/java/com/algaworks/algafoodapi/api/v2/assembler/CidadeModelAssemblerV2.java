@@ -1,8 +1,7 @@
 package com.algaworks.algafoodapi.api.v2.assembler;
 
-import com.algaworks.algafoodapi.api.v1.AlgaLinks;
 import com.algaworks.algafoodapi.api.v1.controller.CidadeController;
-import com.algaworks.algafoodapi.api.v1.model.CidadeModel;
+import com.algaworks.algafoodapi.api.v2.AlgaLinksV2;
 import com.algaworks.algafoodapi.api.v2.model.CidadeModelV2;
 import com.algaworks.algafoodapi.domain.model.Cidade;
 import org.modelmapper.ModelMapper;
@@ -18,7 +17,7 @@ public class CidadeModelAssemblerV2 extends RepresentationModelAssemblerSupport<
     ModelMapper modelMapper;
 
     @Autowired
-    private AlgaLinks algaLinks;
+    private AlgaLinksV2 algaLinks;
 
     public CidadeModelAssemblerV2() {
         super(CidadeController.class, CidadeModelV2.class);

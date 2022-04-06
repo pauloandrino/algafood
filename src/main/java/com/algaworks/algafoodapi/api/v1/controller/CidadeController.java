@@ -6,7 +6,6 @@ import com.algaworks.algafoodapi.api.v1.assembler.CidadeModelAssembler;
 import com.algaworks.algafoodapi.api.v1.openapi.controller.CidadeControllerOpenApi;
 import com.algaworks.algafoodapi.api.v1.model.CidadeModel;
 import com.algaworks.algafoodapi.api.v1.model.input.CidadeInput;
-import com.algaworks.algafoodapi.core.web.AlgaMediaTypes;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algafoodapi.domain.exception.NegocioException;
@@ -33,7 +32,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController()
-@RequestMapping(path = "/cidades", produces = AlgaMediaTypes.V1_APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CidadeController implements CidadeControllerOpenApi {
 
     @Autowired
