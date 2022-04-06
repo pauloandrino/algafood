@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.infrastructure.service.query;
 
-import com.algaworks.algafoodapi.api.model.dto.VendaDiaria;
+import com.algaworks.algafoodapi.api.v1.model.dto.VendaDiaria;
 import com.algaworks.algafoodapi.domain.filter.VendaDiariaFilter;
 import com.algaworks.algafoodapi.domain.model.Pedido;
 import com.algaworks.algafoodapi.domain.model.StatusPedido;
@@ -13,7 +13,6 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class VendaQueryServiceImpl implements VendaQueryService {
