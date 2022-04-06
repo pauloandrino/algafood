@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping(path = "/formasPagamento", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/formasPagamento", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FormaPagamentoController implements FormaPagamentoControllerOpenApi {
 
     @Autowired

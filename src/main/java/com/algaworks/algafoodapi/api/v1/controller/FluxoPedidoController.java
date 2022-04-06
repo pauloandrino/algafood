@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/pedidos/{codigoPedido}")
+@RequestMapping(value = "/v1/pedidos/{codigoPedido}")
 public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 
     @Autowired
