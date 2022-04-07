@@ -1,6 +1,7 @@
 package com.algaworks.algafoodapi.api.v2.model.input;
 
 import com.algaworks.algafoodapi.api.v1.model.input.EstadoIdInput;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@ApiModel("CidadeInput")
 @Getter
 @Setter
 public class CidadeInputV2 {

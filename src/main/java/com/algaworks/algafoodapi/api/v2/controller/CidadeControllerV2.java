@@ -5,6 +5,7 @@ import com.algaworks.algafoodapi.api.v2.assembler.CidadeInputDisasemblerV2;
 import com.algaworks.algafoodapi.api.v2.assembler.CidadeModelAssemblerV2;
 import com.algaworks.algafoodapi.api.v2.model.CidadeModelV2;
 import com.algaworks.algafoodapi.api.v2.model.input.CidadeInputV2;
+import com.algaworks.algafoodapi.api.v2.openApi.CidadeControllerV2OpenApi;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algafoodapi.domain.exception.NegocioException;
@@ -30,7 +31,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping(path = "/v2/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CidadeControllerV2 {
+public class CidadeControllerV2 implements CidadeControllerV2OpenApi {
 
     @Autowired
     CidadeRepository cidadeRepository;

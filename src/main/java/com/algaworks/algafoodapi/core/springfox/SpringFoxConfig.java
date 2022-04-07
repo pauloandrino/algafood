@@ -1,9 +1,13 @@
 package com.algaworks.algafoodapi.core.springfox;
 
 import com.algaworks.algafoodapi.api.ExceptionHandler.Problem;
+import com.algaworks.algafoodapi.api.v1.model.CidadeModel;
+import com.algaworks.algafoodapi.api.v1.model.CozinhaModel;
 import com.algaworks.algafoodapi.api.v1.model.EstadoModel;
 import com.algaworks.algafoodapi.api.v1.model.FormaPagamentoModel;
 import com.algaworks.algafoodapi.api.v1.model.GrupoModel;
+import com.algaworks.algafoodapi.api.v1.model.LinksModelOpenApi;
+import com.algaworks.algafoodapi.api.v1.model.PedidoResumoModel;
 import com.algaworks.algafoodapi.api.v1.model.PermissaoModel;
 import com.algaworks.algafoodapi.api.v1.model.ProdutoModel;
 import com.algaworks.algafoodapi.api.v1.model.RestauranteBasicoModel;
@@ -15,14 +19,14 @@ import com.algaworks.algafoodapi.api.v1.openapi.model.FormasPagamentoModelOpenAp
 import com.algaworks.algafoodapi.api.v1.openapi.model.GruposModelOpenApi;
 import com.algaworks.algafoodapi.api.v1.openapi.model.PageableModelOpenApi;
 import com.algaworks.algafoodapi.api.v1.openapi.model.PedidosResumoModelOpenApi;
-import com.algaworks.algafoodapi.api.v1.model.CidadeModel;
-import com.algaworks.algafoodapi.api.v1.model.CozinhaModel;
-import com.algaworks.algafoodapi.api.v1.model.LinksModelOpenApi;
-import com.algaworks.algafoodapi.api.v1.model.PedidoResumoModel;
 import com.algaworks.algafoodapi.api.v1.openapi.model.PermissoesModelOpenApi;
 import com.algaworks.algafoodapi.api.v1.openapi.model.ProdutosModelOpenApi;
 import com.algaworks.algafoodapi.api.v1.openapi.model.RestaurantesBasicoModelOpenApi;
 import com.algaworks.algafoodapi.api.v1.openapi.model.UsuariosModelOpenApi;
+import com.algaworks.algafoodapi.api.v2.model.CidadeModelV2;
+import com.algaworks.algafoodapi.api.v2.model.CozinhaModelV2;
+import com.algaworks.algafoodapi.api.v2.model.openApi.CidadesModelV2OpenApi;
+import com.algaworks.algafoodapi.api.v2.model.openApi.CozinhasModelV2OpenApi;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -157,7 +161,16 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         File.class, InputStream.class)
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .directModelSubstitute(Links.class, LinksModelOpenApi.class)
-                .apiInfo(apiInfoV2());
+                .apiInfo(apiInfoV2())
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(PagedModel.class, CozinhaModelV2.class),
+                        CozinhasModelV2OpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, CidadeModelV2.class),
+                        CidadesModelV2OpenApi.class))
+                .apiInfo(apiInfoV2())
+                .tags(new Tag("Cidades", "Gerencia as cidades"),
+                        new Tag("Cozinhas", "Gerencia as cozinhas"));
     }
 
     private List<ResponseMessage> globalGetResponseMessages() {

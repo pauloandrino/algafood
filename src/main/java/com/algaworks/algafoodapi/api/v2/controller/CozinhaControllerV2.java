@@ -5,6 +5,7 @@ import com.algaworks.algafoodapi.api.v2.assembler.CozinhaInputDisassemblerV2;
 import com.algaworks.algafoodapi.api.v2.assembler.CozinhaModelAssemblerV2;
 import com.algaworks.algafoodapi.api.v2.model.CozinhaModelV2;
 import com.algaworks.algafoodapi.api.v2.model.input.CozinhaInputV2;
+import com.algaworks.algafoodapi.api.v2.openApi.CozinhaControllerV2OpenApi;
 import com.algaworks.algafoodapi.domain.model.Cozinha;
 import com.algaworks.algafoodapi.domain.repository.CozinhaRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroCozinhaService;
@@ -31,7 +32,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/v2/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CozinhaControllerV2 {
+public class CozinhaControllerV2 implements CozinhaControllerV2OpenApi {
 
     @Autowired
     private CozinhaRepository cozinhaRepository;
