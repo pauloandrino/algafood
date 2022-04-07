@@ -69,6 +69,7 @@ import java.util.List;
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig implements WebMvcConfigurer {
+/*
 
     @Bean
     public Docket apiDocketV1() {
@@ -138,6 +139,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         new Tag("Estatísticas", "Estatísticas da AlgaFood"),
                         new Tag("Permissões", "Gerencia as permissões"));
     }
+*/
 
     @Bean
     public Docket apiDocketV2() {
