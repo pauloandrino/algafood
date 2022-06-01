@@ -19,6 +19,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
     @Autowired
     private PagedResourcesAssembler<Cozinha> pagedResourcesAssembler;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping()
     public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable) {
 
@@ -65,12 +67,14 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{cozinhaId}")
     public CozinhaModel buscar(@PathVariable Long cozinhaId) {
         Cozinha cozinha = cadastroCozinha.buscarOuFalhar(cozinhaId);
         return cozinhaModelAssembler.toModel(cozinha);
     }
 
+    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
@@ -80,6 +84,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 
     }
 
+    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
     @PutMapping("/{cozinhaId}")
     public CozinhaModel atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInput cozinhaInput) {
 
@@ -92,6 +97,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
         return cozinhaModelAssembler.toModel(cozinhaAtual);
     }
 
+    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
     @DeleteMapping("/{cozinhaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long cozinhaId) {
