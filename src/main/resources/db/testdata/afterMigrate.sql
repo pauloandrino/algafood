@@ -121,7 +121,7 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 insert into usuario (id, nome, email, senha, data_cadastro) values
 (5, 'Manoel Lima', 'manoel.loja@gmail.com', '$2a$12$CHmJLeYVWvkK1ACukKAyzO8WX.iA0KEc.3uqbEkwi9BsNiMU88Bi2', utc_timestamp);
 
-insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 4);
 
 insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 5), (3, 5);
 
