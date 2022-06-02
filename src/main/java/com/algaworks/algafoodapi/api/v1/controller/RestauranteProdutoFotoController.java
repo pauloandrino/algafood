@@ -4,6 +4,7 @@ import com.algaworks.algafoodapi.api.v1.assembler.FotoProdutoModelAssembler;
 import com.algaworks.algafoodapi.api.v1.openapi.controller.RestauranteProdutoFotoControllerOpenApi;
 import com.algaworks.algafoodapi.api.v1.model.FotoProdutoModel;
 import com.algaworks.algafoodapi.api.v1.model.input.FotoProdutoInput;
+import com.algaworks.algafoodapi.core.security.CheckSecurity;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.model.FotoProduto;
 import com.algaworks.algafoodapi.domain.model.Produto;
@@ -49,8 +50,8 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     @Autowired
     private FotoStorageService fotoStorage;
 
+    @CheckSecurity.Restaurantes.PodeEditar
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-
     public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId,
                                           @PathVariable Long produtoId,
                                           @Valid FotoProdutoInput fotoProdutoInput,
@@ -71,6 +72,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
         return fotoProdutoModelAssembler.toModel(fotoSalva);
     }
 
+    @CheckSecurity.Restaurantes.PodeConsultar
     @GetMapping()
     public FotoProdutoModel buscar(@PathVariable Long restauranteId,
                                    @PathVariable Long produtoId) {
@@ -125,6 +127,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     }
 
     @DeleteMapping
+    @CheckSecurity.Restaurantes.PodeEditar
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long restauranteId,
                         @PathVariable Long produtoId) {
