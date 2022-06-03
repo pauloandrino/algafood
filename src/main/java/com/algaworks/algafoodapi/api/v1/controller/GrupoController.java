@@ -5,6 +5,7 @@ import com.algaworks.algafoodapi.api.v1.assembler.GrupoModelAssembler;
 import com.algaworks.algafoodapi.api.v1.openapi.controller.GrupoControllerOpenApi;
 import com.algaworks.algafoodapi.api.v1.model.GrupoModel;
 import com.algaworks.algafoodapi.api.v1.model.input.GrupoInput;
+import com.algaworks.algafoodapi.core.security.CheckSecurity;
 import com.algaworks.algafoodapi.domain.model.Grupo;
 import com.algaworks.algafoodapi.domain.repository.GrupoRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroGrupoService;
@@ -42,6 +43,7 @@ public class GrupoController implements GrupoControllerOpenApi {
     private GrupoInputDisasembler grupoInputDisasembler;
 
     @Override
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @GetMapping
     public CollectionModel<GrupoModel> listar() {
         List<Grupo> todosGrupos = grupoRepository.findAll();
@@ -50,12 +52,14 @@ public class GrupoController implements GrupoControllerOpenApi {
     }
 
     @GetMapping("/{grupoId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     public GrupoModel buscar(@PathVariable Long grupoId) {
         Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
         return grupoAssembler.toModel(grupo);
     }
 
     @PostMapping
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     @ResponseStatus(HttpStatus.CREATED)
     public GrupoModel adicionar(@RequestBody @Valid GrupoInput grupoInput) {
 
@@ -67,6 +71,7 @@ public class GrupoController implements GrupoControllerOpenApi {
     }
 
     @PutMapping("/{grupoId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     public GrupoModel atualizar(@PathVariable Long grupoId,
                                 @RequestBody @Valid GrupoInput grupoInput) {
         Grupo grupoAtual = cadastroGrupo.buscarOuFalhar(grupoId);
@@ -79,6 +84,7 @@ public class GrupoController implements GrupoControllerOpenApi {
     }
 
     @DeleteMapping("/{grupoId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     public void remover(@PathVariable Long grupoId) {
         cadastroGrupo.excluir(grupoId);
     }

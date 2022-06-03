@@ -7,6 +7,7 @@ import com.algaworks.algafoodapi.api.v1.model.UsuarioModel;
 import com.algaworks.algafoodapi.api.v1.model.input.SenhaInput;
 import com.algaworks.algafoodapi.api.v1.model.input.UsuarioComSenhaInput;
 import com.algaworks.algafoodapi.api.v1.model.input.UsuarioInput;
+import com.algaworks.algafoodapi.core.security.CheckSecurity;
 import com.algaworks.algafoodapi.domain.model.Usuario;
 import com.algaworks.algafoodapi.domain.repository.UsuarioRepository;
 import com.algaworks.algafoodapi.domain.service.CadastroUsuarioService;
@@ -43,16 +44,19 @@ public class UsuarioController implements UsuarioControllerOpenApi {
     private UsuarioInputDisasembler usuarioInputDisasembler;
 
     @GetMapping
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     public CollectionModel<UsuarioModel> listar() {
         return usuarioModelAssembler.toCollectionModel(usuarioRepository.findAll());
     }
 
     @GetMapping("/{usuarioId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     public UsuarioModel buscar(@PathVariable Long usuarioId) {
         return usuarioModelAssembler.toModel(cadastroUsuario.buscarOuFalhar(usuarioId));
     }
 
     @PostMapping
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     public UsuarioModel adicionar(@RequestBody @Valid UsuarioComSenhaInput usuarioInput) {
         Usuario usuario = usuarioInputDisasembler.toDomainObject(usuarioInput);
 
@@ -60,6 +64,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
     }
 
     @PutMapping("/{usuarioId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeAlterarUsuario
     public UsuarioModel atualizar(@PathVariable Long usuarioId,
                                   @RequestBody @Valid UsuarioInput usuarioInput) {
         Usuario usuarioAtual = cadastroUsuario.buscarOuFalhar(usuarioId);
@@ -72,6 +77,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
     }
 
     @DeleteMapping("/{usuarioId}")
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     public void remover(@PathVariable Long usuarioId) {
         cadastroUsuario.excluir(usuarioId);
     }
