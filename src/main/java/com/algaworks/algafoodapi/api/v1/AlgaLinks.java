@@ -62,7 +62,7 @@ public class AlgaLinks {
                 .entregar(codigoPedido)).withRel(rel);
     }
 
-    public Link linkToCacncelamentoPedido(String codigoPedido, String rel) {
+    public Link linkToCancelamentoPedido(String codigoPedido, String rel) {
         return linkTo(methodOn(FluxoPedidoController.class)
                 .cancelar(codigoPedido)).withRel(rel);
     }
