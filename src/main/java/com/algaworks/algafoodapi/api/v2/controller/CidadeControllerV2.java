@@ -6,6 +6,7 @@ import com.algaworks.algafoodapi.api.v2.assembler.CidadeModelAssemblerV2;
 import com.algaworks.algafoodapi.api.v2.model.CidadeModelV2;
 import com.algaworks.algafoodapi.api.v2.model.input.CidadeInputV2;
 import com.algaworks.algafoodapi.api.v2.openApi.CidadeControllerV2OpenApi;
+import com.algaworks.algafoodapi.core.security.CheckSecurity;
 import com.algaworks.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafoodapi.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algafoodapi.domain.exception.NegocioException;
@@ -46,12 +47,14 @@ public class CidadeControllerV2 implements CidadeControllerV2OpenApi {
     private CidadeInputDisasemblerV2 cidadeInputDisasembler;
 
     @GetMapping
+    @CheckSecurity.Cidades.PodeConsultar
     public CollectionModel<CidadeModelV2> listar() {
         List<Cidade> cidades = cidadeRepository.findAll();
         return cidadeModelAssembler.toCollectionModel(cidades);
     }
 
     @GetMapping("{cidadeId}")
+    @CheckSecurity.Cidades.PodeConsultar
     public CidadeModelV2 buscar(@PathVariable Long cidadeId) {
         Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId);
         return cidadeModelAssembler.toModel(cidade);
