@@ -21,7 +21,7 @@
         <jasperreports.version>6.14.0</jasperreports.version>
         <aws-java-sdk.version>1.11.939</aws-java-sdk.version>
         <spring-cloud-aws-context-version>1.2.1.RELEASE</spring-cloud-aws-context-version>
-        <spring-fox.version>2.9.2</spring-fox.version>
+        <spring-fox.version>2.10.0</spring-fox.version>
         <loggly.version>0.1.5</loggly.version>
         <oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
         <spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
